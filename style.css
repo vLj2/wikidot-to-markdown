@@ -1,0 +1,203 @@
+.wikistyle {
+    font: 13.34px helvetica,arial,freesans,clean,sans-serif;
+    line-height: 1.2em;
+}
+.wikistyle h1, .wikistyle h2, .wikistyle h3, .wikistyle h4, .wikistyle h5, .wikistyle h6 {
+    border: 0 none !important;
+}
+.wikistyle h1 {
+    border-top: 4px solid #AAAAAA !important;
+    font-size: 170% !important;
+    margin-top: 1.5em !important;
+    padding-top: 0.5em !important;
+}
+.wikistyle h1:first-child {
+    border-top: medium none !important;
+    margin-top: 0 !important;
+    padding-top: 0.25em !important;
+}
+.wikistyle h2 {
+    border-top: 4px solid #E0E0E0 !important;
+    font-size: 150% !important;
+    margin-top: 1.5em !important;
+    padding-top: 0.5em !important;
+}
+.wikistyle h3 {
+    margin-top: 1em !important;
+}
+.wikistyle p {
+    line-height: 1.5em !important;
+    margin: 1em 0 !important;
+}
+.wikistyle a.absent {
+    color: #AA0000;
+}
+.wikistyle ul, #wiki-form .content-body ul {
+    margin: 1em 0 1em 2em !important;
+}
+.wikistyle ol, #wiki-form .content-body ol {
+    margin: 1em 0 1em 2em !important;
+}
+.wikistyle ul li, #wiki-form .content-body ul li, .wikistyle ol li, #wiki-form .content-body ol li {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+.wikistyle ul ul, .wikistyle ul ol, .wikistyle ol ol, .wikistyle ol ul, #wiki-form .content-body ul ul, #wiki-form .content-body ul ol, #wiki-form .content-body ol ol, #wiki-form .content-body ol ul {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+.wikistyle blockquote {
+    border-left: 5px solid #DDDDDD !important;
+    color: #555555 !important;
+    margin: 1em 0 !important;
+    padding-left: 0.6em !important;
+}
+.wikistyle dt {
+    font-weight: bold !important;
+    margin-left: 1em !important;
+}
+.wikistyle dd {
+    margin-bottom: 1em !important;
+    margin-left: 2em !important;
+}
+.wikistyle table {
+    margin: 1em 0 !important;
+}
+.wikistyle table th {
+    border-bottom: 1px solid #BBBBBB !important;
+    padding: 0.2em 1em !important;
+}
+.wikistyle table td {
+    border-bottom: 1px solid #DDDDDD !important;
+    padding: 0.2em 1em !important;
+}
+.wikistyle pre {
+    background-color: #F8F8FF !important;
+    border: 1px solid #DEDEDE !important;
+    color: #444444 !important;
+    font-size: 12px !important;
+    line-height: 1.5em !important;
+    margin: 1em 0 !important;
+    overflow: auto !important;
+    padding: 0.5em !important;
+}
+.wikistyle pre code {
+    background-color: #F8F8FF !important;
+    border: medium none !important;
+    font-size: 12px !important;
+    padding: 0 !important;
+}
+.wikistyle code {
+    background-color: #F8F8FF !important;
+    border: 1px solid #DEDEDE !important;
+    color: #444444 !important;
+    font-size: 12px !important;
+    padding: 0 0.2em !important;
+}
+.wikistyle a code, .wikistyle a:link code, .wikistyle a:visited code {
+    color: #4183C4 !important;
+}
+.wikistyle img {
+    max-width: 100%;
+}
+.wikistyle pre.console {
+    background-color: black !important;
+    color: white !important;
+    font-size: 12px !important;
+    line-height: 1.5em !important;
+    margin: 1em 0 !important;
+    padding: 0.5em !important;
+}
+.wikistyle pre.console code {
+    background-color: black !important;
+    border: medium none !important;
+    color: white !important;
+    font-size: 12px !important;
+    padding: 0 !important;
+}
+.wikistyle pre.console span {
+    color: #888888 !important;
+}
+.wikistyle pre.console span.command {
+    color: yellow !important;
+}
+.wikistyle .frame {
+    display: inline-block;
+    margin: 0;
+}
+.wikistyle .frame img {
+    display: block;
+}
+.wikistyle .frame > span {
+    border: 1px solid #AAAAAA;
+    display: block;
+    padding: 4px;
+}
+.wikistyle .frame span span {
+    display: block;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 10pt;
+    line-height: 10pt;
+    margin: 0;
+    padding: 4px 0 2px;
+    text-align: center;
+}
+.wikistyle .float-left {
+    float: left;
+    padding: 0.5em 1em 0.25em 0;
+}
+.wikistyle .float-right {
+    float: right;
+    padding: 0.5em 0 0.25em 1em;
+}
+.wikistyle .align-left {
+    display: block;
+    text-align: left;
+}
+.wikistyle .align-center {
+    display: block;
+    text-align: center;
+}
+.wikistyle .align-right {
+    display: block;
+    text-align: right;
+}
+.wikistyle.gollum.footer {
+    border-top: 4px solid #F0F0F0;
+    margin-top: 2em;
+}
+.wikistyle.gollum > h1:first-child {
+    display: none;
+}
+.wikistyle.gollum.asciidoc > div#header > h1:first-child {
+    display: none;
+}
+.wikistyle.gollum.asciidoc .ulist p, .wikistyle.gollum.asciidoc .olist p {
+    margin: 0 !important;
+}
+.wikistyle.gollum.asciidoc .loweralpha {
+    list-style-type: lower-alpha;
+}
+.wikistyle.gollum.asciidoc .lowerroman {
+    list-style-type: lower-roman;
+}
+.wikistyle.gollum.asciidoc .upperalpha {
+    list-style-type: upper-alpha;
+}
+.wikistyle.gollum.asciidoc .upperroman {
+    list-style-type: upper-roman;
+}
+.wikistyle.gollum.org > p.title:first-child {
+    display: none;
+}
+.wikistyle.gollum.org p:first-child + h1 {
+    border-top: medium none !important;
+}
+.wikistyle.gollum.pod > a.dummyTopAnchor:first-child + h1 {
+    display: none;
+}
+.wikistyle.gollum.pod h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
