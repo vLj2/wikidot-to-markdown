@@ -32,11 +32,12 @@ import datetime as dt
 ## for time.sleep()
 import time
 
-#SITE = 'http://blog.philippklaus.de/xmlrpc.php'
-SITE = 'http://pklaus.wordpress.com/xmlrpc.php'
+SITE = 'http://blog.philippklaus.de/xmlrpc.php'
+#SITE = 'http://pklaus.wordpress.com/xmlrpc.php'
 USER = 'pklaus'
 DEFAULT_OUTPUT_DIR = "output"
-SLEEP_TIME = 1 # seconds to sleep after each post sent to the blog (if you use your own server, set this to 0)
+#SLEEP_TIME = 1 # seconds to sleep after each post sent to the blog (if you use your own server, set this to 0)
+SLEEP_TIME = 0
 
 class WikidotToMarkdown(object):
     def __init__(self):
@@ -199,7 +200,7 @@ def main():
     # parse our CLI options
     options, arguments = p.parse_args()
     if options.filename == None:
-        p.error("Please provide the filename to convert as the first argument!")
+        p.error("No filename for the input file set. Have a look at the parameters using the option -h.")
         sys.exit(1)
     if options.output_dir == None:
         options.output_dir = raw_input('Please enter an output directory for the converted documents [%s]: ' % DEFAULT_OUTPUT_DIR)
