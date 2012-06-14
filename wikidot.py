@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- encoding: UTF8 -*-
 
 # Copyright 2012 Philipp Klaus
 # Part of https://github.com/vLj2/wikidot-to-markdown
@@ -19,6 +20,8 @@ class WikidotToMarkdown(object):
                                     r'^\+\+ ([^\n]*)$': r"## \1\n",
                                     r'^\+\+\+ ([^\n]*)$': r"### \1\n",
                                     r'([^:])//([\s\S ]*?)//': r'\1*\2*', # italics
+                                    r'([^:])__([\s\S ]*?)__': r'\1**\2**', # underlining → bold
+                                    r'([^:]){{([\s\S ]*?)}}': r'\1`\2`', # inline monospaced text
                                   }
         self.regex_split_condition = r"^\+ ([^\n]*)$"
 
