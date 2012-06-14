@@ -16,10 +16,10 @@ class WikidotToMarkdown(object):
         self.static_replacements = { '[[toc]]': '', # no equivalent for table of contents in Markdown
                                    }
         self.regex_replacements = { r'^\+ ([^\n]*)$': r"# \1\n", # headings
-                                     r'^\+\+ ([^\n]*)$': r"## \1\n",
-                                     r'^\+\+\+ ([^\n]*)$': r"### \1\n",
-                                     r'([^:])//([\s\S ]*?)//': r'\1*\2*',
-                                   }
+                                    r'^\+\+ ([^\n]*)$': r"## \1\n",
+                                    r'^\+\+\+ ([^\n]*)$': r"### \1\n",
+                                    r'([^:])//([\s\S ]*?)//': r'\1*\2*', # italics
+                                  }
         self.regex_split_condition = r"^\+ ([^\n]*)$"
 
     def convert(self, text):
