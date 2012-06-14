@@ -32,9 +32,9 @@ import datetime as dt
 ## for time.sleep()
 import time
 
-SITE = 'http://blog.philippklaus.de/xmlrpc.php'
-#SITE = 'http://pklaus.wordpress.com/xmlrpc.php'
-USER = 'pklaus'
+SITE = 'http://blog.example.com/xmlrpc.php'
+#SITE = 'http://yourblog.wordpress.com/xmlrpc.php'
+USER = 'username'
 DEFAULT_OUTPUT_DIR = "output"
 #SLEEP_TIME = 1 # seconds to sleep after each post sent to the blog (if you use your own server, set this to 0)
 SLEEP_TIME = 0
@@ -74,7 +74,7 @@ class WikidotToMarkdown(object):
         for link in re.finditer(r"\[("+self.url_regex+r") ([^\]]*)\]", text):
             #print link.group(0), "[%s](%s)" % (link.groups()[-1],link.group(1))
             text = text.replace(link.group(0),"[%s](%s)" % (link.groups()[-1],link.group(1)),1)
-	# search for unhandled tags and state them
+    # search for unhandled tags and state them
         for unhandled_tag in re.finditer(r"\[\[/([\s\S ]*?)\]\]", text):
             print("Found an unhandled tag: %s" % unhandled_tag.group(1))
         # now we substitute back our code blocks
@@ -127,33 +127,34 @@ class ConversionController(object):
         self.write_unicode_file("%s/%s" % (self.__output_directory, 'complete.html'),html_text)
 
         # now handle the texts split to little junks:
-        parts = self.__converter.split_text(text)
-        if len(parts) < 2: return # we need at least 2 entries (the first part is trashed and one part with content!)
-        i=0
-        if self.__fill_blog:
-            wprb = WordPressPostingRobot(SITE,USER)
-            start_day = raw_input('Please enter the start date for the posts: [%s] ' % dt.datetime.now().strftime("%Y-%m-%d") )
-	    start_day = start_day if start_day != "" else dt.datetime.now().strftime("%Y-%m-%d")
-            start = [int(value) for value in start_day.split("-")]
-            end_day = raw_input('Please enter the end date for the posts: [%s] ' % dt.datetime.now().strftime("%Y-%m-%d") )
-	    end_day = end_day if end_day != "" else dt.datetime.now().strftime("%Y-%m-%d")
-            end = [int(value) for value in end_day.split("-")]
-            days_difference = (dt.datetime(end[0],end[1],end[2])-dt.datetime(start[0],start[1],start[2])).days
-            gradient = .0 if len(parts) == 2 else float(days_difference)/(len(parts)-2)
-        for text_part in parts:
-            text_part =  self.__converter.convert(text_part)
-            i += 1
-            if i == 1:
-                print("\nAttention! We skip the first output part:\n\n%s" % text_part)
-                continue
-            if self.__create_individual_files: self.write_unicode_file("%s/%i%s" % (self.__output_directory, i, '.mktxt'),text_part)
-            lines = text_part.split("\n")
+        if self.__create_individual_files:
+            parts = self.__converter.split_text(text)
+            if len(parts) < 2: return # we need at least 2 entries (the first part is trashed and one part with content!)
+            i=0
             if self.__fill_blog:
-		title = lines[0].replace("# ","")
-		content = string.join(lines[1:],'\n')
-		date = dt.datetime(start[0],start[1],start[2], 17, 11, 11) + dt.timedelta(int((i-2)*gradient))
-		wprb.post_new(title, content,[],'','private',date)
-                time.sleep(SLEEP_TIME)
+                wprb = WordPressPostingRobot(SITE,USER)
+                start_day = raw_input('Please enter the start date for the posts: [%s] ' % dt.datetime.now().strftime("%Y-%m-%d") )
+            start_day = start_day if start_day != "" else dt.datetime.now().strftime("%Y-%m-%d")
+                start = [int(value) for value in start_day.split("-")]
+                end_day = raw_input('Please enter the end date for the posts: [%s] ' % dt.datetime.now().strftime("%Y-%m-%d") )
+            end_day = end_day if end_day != "" else dt.datetime.now().strftime("%Y-%m-%d")
+                end = [int(value) for value in end_day.split("-")]
+                days_difference = (dt.datetime(end[0],end[1],end[2])-dt.datetime(start[0],start[1],start[2])).days
+                gradient = .0 if len(parts) == 2 else float(days_difference)/(len(parts)-2)
+            for text_part in parts:
+                text_part =  self.__converter.convert(text_part)
+                i += 1
+                if i == 1:
+                    print("\nAttention! We skip the first output part (when splitting the text into parts):\n\n%s" % text_part)
+                    continue
+                if self.__create_individual_files: self.write_unicode_file("%s/%i%s" % (self.__output_directory, i, '.mktxt'),text_part)
+                lines = text_part.split("\n")
+                if self.__fill_blog:
+                title = lines[0].replace("# ","")
+                content = string.join(lines[1:],'\n')
+                date = dt.datetime(start[0],start[1],start[2], 17, 11, 11) + dt.timedelta(int((i-2)*gradient))
+                wprb.post_new(title, content,[],'','private',date)
+                    time.sleep(SLEEP_TIME)
 
     def write_unicode_file(self, path_to_file, content):
         try:
@@ -171,7 +172,7 @@ class WordPressPostingRobot(object):
         #wp.call(GetRecentPosts(10))
         #wp.call(GetUserInfo())
 
-    def post_new(self, title, content, categories = ['Computing'], individual_tags = '', status = 'private', date = dt.datetime.now()):
+    def post_new(self, title, content, categories = ['Mac OS X'], individual_tags = '', status = 'private', date = dt.datetime.now()):
         post = WordPressPost()
         post.title = title
         post.description = content
@@ -184,15 +185,12 @@ class WordPressPostingRobot(object):
         self.__wp.call(NewPost(post, True))
 
 
-
-
-
 def main():
     """ Main function called to start the conversion.""" 
     p = optparse.OptionParser(version="%prog 1.0")
     
     # set possible CLI options
-    p.add_option('--fill-blog', '-b', action="store_true", help="fill the blog", default=False, dest="blog")
+    p.add_option('--save-junks-to-blog', '-b', action="store_true", help="save the individual files as blog posts (only relevant if -s set)", default=False, dest="blog")
     p.add_option('--save-individual', '-s', action="store_true", help="save individual files for every headline", default=False, dest="individual")
     p.add_option('--input-file', '-f', metavar="INPUT_FILE", help="Read from INPUT_FILE.", dest="filename")
     p.add_option('--output-dir', '-o', metavar="OUTPUT_DIRECTORY", help="Save the converted files to the OUTPUT_DIRECTORY.", dest="output_dir")
@@ -211,5 +209,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
