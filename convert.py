@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# Copyright 2012 Philipp Klaus
+# Part of https://github.com/vLj2/wikidot-to-markdown
+
 from wikidot import WikidotToMarkdown ## most important here
 
 import sys ## for sys.exit()

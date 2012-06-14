@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# Copyright 2012 Philipp Klaus
+# Part of https://github.com/vLj2/wikidot-to-markdown
+
 import re ## The most important module here!
 import string ## for string.join()
 #import markdown
