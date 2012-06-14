@@ -23,7 +23,8 @@ class WikidotToMarkdown(object):
         self.regex_split_condition = r"^\+ ([^\n]*)$"
 
     def convert(self, text):
-        # first we search for [[code]] statements as we do not any replacement to happen inside those code blocks!
+        text = '\n'+text+'\n'# add embed in newlines (makes regex replaces work better)
+        # first we search for [[code]] statements as we don't want any replacement to happen inside those code blocks!
         code_blocks = dict()
         code_blocks_found = re.findall(re.compile(r'(\[\[code( type="([\S]+)")?\]\]([\s\S ]*?)\[\[/code\]\])',re.MULTILINE), text)
         for code_block_found in code_blocks_found:
@@ -49,7 +50,7 @@ class WikidotToMarkdown(object):
         # now we substitute back our code blocks
         for tmp_hash, code in code_blocks.items():
             text = text.replace(tmp_hash, code, 1)
-        return text
+        return text[1:-1]
 
     def split_text(self, text):
         output_parts = []
